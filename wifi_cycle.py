@@ -28,19 +28,22 @@ def available_wifi():
 def connected_to():
     return trun("nmcli -t -f NAME c show --active").removeprefix("Auto").strip()
 
+
 def connect():
-    idx = list(WIFI.keys()).index(connected_to()) + 1 if connected_to() else 0
+    idx = list(WIFI.keys()).index(connected_to()) + 1 if connected_to() and connected_to() in WIFI.keys() else 0
     if idx >= len(WIFI):
         idx = 0
 
+    starting_ssid =  list(WIFI.keys())[idx]
 
     connected = False
     while not connected:
         ssid = list(WIFI.keys())[idx]
         
-        if ssid == connected_to():
+        if ssid == starting_ssid:
             # if cycle back to same wifi, quit
             print("cycled all wifi, can connect to \033[91mnone\033[0m")
+            trun(f"notify-send 'cannot connect to any wifi...'")
             break
 
         try:
