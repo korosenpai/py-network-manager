@@ -49,6 +49,7 @@ def connect():
         try:
             av = trun(f"nmcli dev wifi c '{ssid}' password '{WIFI[ssid]}'")
             print(f"connected to \033[92m'{ssid}'\033[0m")
+            trun(f"notify-send 'connected to' '{ssid}'")
             connected = True
 
         except Exception as e:
