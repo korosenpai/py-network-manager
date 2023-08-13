@@ -34,7 +34,7 @@ def connect():
     if idx >= len(WIFI):
         idx = 0
 
-    starting_ssid =  list(WIFI.keys())[idx]
+    starting_ssid =  list(WIFI.keys())[idx - 1]
 
     connected = False
     while not connected:
