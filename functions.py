@@ -29,6 +29,14 @@ def get_saved_wifi_password(wifi):
         #return "error: not found"
         return
 
+def create_saved_wifi_dict():
+    wifis = {}
+    for wifi in get_available_saved_wifi():
+        #print(wifi, " : ", get_saved_wifi_password(wifi))
+        wifis[wifi] = get_saved_wifi_password(wifi).removesuffix("\n")
+    
+    return wifis
+
 # create qr and show password of current wifi connected
 def create_qr():
     msg = "nmcli dev wifi show-password"
@@ -38,7 +46,6 @@ def create_qr():
 
 
 if __name__ == "__main__":
-    print(get_available_saved_wifi())
+    #print(get_available_saved_wifi())
 
-    for wifi in get_available_saved_wifi():
-        print(wifi, " : ", get_saved_wifi_password(wifi))
+    print(create_saved_wifi_dict())
