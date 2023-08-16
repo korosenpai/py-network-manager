@@ -58,6 +58,4 @@ def connect():
 
 
 if __name__ == "__main__":
-    #connect("TIM_MF90_1B3C", "896_DIP_ECS")
-    #connect("it hurts when IP😩", "bennysmulpp")
     connect()
