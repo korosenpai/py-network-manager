@@ -5,7 +5,7 @@ import subprocess
 import pathlib
 from os import system, getcwd, chdir
 
-# TODO: add cycle through wifis stored in computer automatically
+from functions import create_saved_wifi_dict
 
 # NOTE: getcwd() is current dir, pathlib is dir where we want to be (got it from __file__)
 correct_path = str(pathlib.Path(__file__).parent.absolute())
@@ -13,20 +13,15 @@ if getcwd() != correct_path:
     chdir(correct_path)
 
 
-with open("wifi.json", "r") as jsonfile:
-    WIFI = json.load(jsonfile)
-
+WIFI = create_saved_wifi_dict()
 
 # run in terminal
 def trun(command) -> tuple:
     return subprocess.check_output(command, shell=True).decode()
 
 
-def available_wifi():
-    return trun("nmcli dev wifi")[0]
-
 def connected_to():
-    return trun("nmcli -t -f NAME c show --active").removeprefix("Auto").strip()
+    return trun("nmcli -t -f NAME c show --active").strip()
 
 
 def connect():
@@ -47,7 +42,7 @@ def connect():
             break
 
         try:
-            av = trun(f"nmcli dev wifi c '{ssid}' password '{WIFI[ssid]}'")
+            av = trun(f"nmcli dev wifi c '{ssid.removeprefix('Auto ')}' password '{WIFI[ssid]}'")
             print(f"connected to \033[92m'{ssid}'\033[0m")
             trun(f"notify-send 'connected to' '{ssid}'")
             connected = True
@@ -58,4 +53,5 @@ def connect():
 
 
 if __name__ == "__main__":
+    print(f"currently connected to: '{connected_to()}'\n")
     connect()
