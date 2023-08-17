@@ -10,6 +10,9 @@ def trun(command) -> tuple:
     return subprocess.check_output(command, shell=True).decode()
 
 
+def connect(pwd=""):
+    pass
+
 def get_available_saved_wifi() -> list:
     wifis = (
         trun("nmcli -g NAME connection show")
@@ -49,5 +52,5 @@ def create_qr():
 
 if __name__ == "__main__":
     #print(get_available_saved_wifi())
-    #print(create_saved_wifi_dict())
-    print(get_saved_wifi_password("Auto it hurts when IP😩"))
+    print(create_saved_wifi_dict())
+    create_qr()

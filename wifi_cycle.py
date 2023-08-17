@@ -5,7 +5,7 @@ import subprocess
 import pathlib
 from os import system, getcwd, chdir
 
-from functions import create_saved_wifi_dict
+from functions import trun, create_saved_wifi_dict
 
 # move place to this correct dir if run from somewhere else: ex polybar
 # NOTE: getcwd() is current dir, pathlib is dir where we want to be (got it from __file__)
@@ -15,10 +15,6 @@ if getcwd() != correct_path:
 
 
 WIFI = create_saved_wifi_dict()
-
-# run in terminal
-def trun(command):
-    return subprocess.check_output(command, shell=True).decode()
 
 
 def connected_to():
