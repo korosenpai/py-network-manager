@@ -1,9 +1,6 @@
 import subprocess
 from os import system
 from os.path import isfile
-import json
-
-WIFI_FILENAME = "./wifi.json"
 
 def to_raw(string) -> str:
     return fr"{string}"
@@ -40,7 +37,6 @@ def create_saved_wifi_dict():
         wifis[wifi] = get_saved_wifi_password(wifi).removesuffix("\n")
     
     return wifis
-
 
 
 # create qr and show password of current wifi connected
