@@ -1,5 +1,9 @@
 import subprocess
 from os import system
+from os.path import isfile
+import json
+
+WIFI_FILENAME = "./wifi.json"
 
 def to_raw(string) -> str:
     return fr"{string}"
@@ -37,6 +41,8 @@ def create_saved_wifi_dict():
     
     return wifis
 
+
+
 # create qr and show password of current wifi connected
 def create_qr():
     msg = "nmcli dev wifi show-password"
@@ -47,5 +53,5 @@ def create_qr():
 
 if __name__ == "__main__":
     #print(get_available_saved_wifi())
-
-    print(create_saved_wifi_dict())
+    #print(create_saved_wifi_dict())
+    print(get_saved_wifi_password("Auto it hurts when IP😩"))
