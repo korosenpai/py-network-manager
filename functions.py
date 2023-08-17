@@ -10,8 +10,14 @@ def trun(command) -> tuple:
     return subprocess.check_output(command, shell=True).decode()
 
 
-def connect(pwd=""):
-    pass
+def connect(wifi, pwd="") -> bool:
+    try:
+        trun(f"nmcli dev wifi c '{wifi}' ")
+        print(f"connected to \033[92m'{wifi}'\033[0m")
+        return True
+
+    except:
+        return False
 
 def get_available_saved_wifi() -> list:
     wifis = (
@@ -52,5 +58,7 @@ def create_qr():
 
 if __name__ == "__main__":
     #print(get_available_saved_wifi())
-    print(create_saved_wifi_dict())
-    create_qr()
+    #print(create_saved_wifi_dict())
+    #create_qr()
+
+    connect(get_available_saved_wifi()[0])
